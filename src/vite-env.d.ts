@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-interface ImportMetaEnv extends Readonly<Record<string, string>> {
+interface ImportMetaEnv extends Readonly<Record<string, string | boolean | undefined>> {
     readonly VITE_APP_FIREBASE_API_KEY: string
     readonly VITE_APP_FIREBASE_AUTHDOMAIN: string
     readonly VITE_APP_FIREBASE_DATABASEURL: string
@@ -12,4 +12,19 @@ interface ImportMetaEnv extends Readonly<Record<string, string>> {
 
 interface ImportMeta {
     readonly env: ImportMetaEnv
+}
+
+declare module '@mui/material/styles' {
+    interface Theme {
+        css: {
+            primary: React.CSSProperties['color']
+            secondary: React.CSSProperties['color']
+        }
+    }
+    interface ThemeOptions {
+        css?: {
+            primary: React.CSSProperties['color']
+            secondary: React.CSSProperties['color']
+        }
+    }
 }

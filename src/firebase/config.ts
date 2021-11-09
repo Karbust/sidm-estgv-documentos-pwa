@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { FirebaseApp, FirebaseOptions, initializeApp } from 'firebase/app'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import { getDatabase } from 'firebase/database'
 // TODO: Add SDKs for Firebase products that you want to use
@@ -23,11 +23,8 @@ const auth = getAuth(firebaseApp)
 const db = getDatabase(firebaseApp)
 const firestore = getFirestore(firebaseApp)
 
-onAuthStateChanged(auth, (user) => {
-    if (user != null) {
-        console.log('We are authenticated now!')
-    }
+/*updateProfile(getAuth().currentUser!, {
+    displayName: 'António'
+}).then(() => console.log('Atualizado com sucesso.'))*/
 
-    // Do other things
-})
 export { firebaseApp, auth, db, firestore }

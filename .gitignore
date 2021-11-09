@@ -123,3 +123,4 @@ modules.xml
 # End of https://www.toptal.com/developers/gitignore/api/react,webstorm+all,yarn
 
 .env
+build/

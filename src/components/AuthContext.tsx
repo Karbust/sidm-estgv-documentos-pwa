@@ -13,14 +13,15 @@ const AuthContextProvider: FunctionComponent<AuthProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
 
-    useEffect(() => {
-        const user = auth.currentUser
+    onAuthStateChanged(auth, (user) => {
         if (user) {
+            console.log('We are authenticated now!')
             setIsAuthenticated(true)
         } else {
             setIsAuthenticated(false)
         }
-    }, [])
+        setIsLoading(false)
+    })
 
     const logout = (): void => {
         signOut(auth)
@@ -39,7 +40,10 @@ const AuthContextProvider: FunctionComponent<AuthProps> = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, logout }}>
+        <AuthContext.Provider value={{
+            isLoading, isAuthenticated, setIsLoading, setIsAuthenticated, logout
+        }}
+        >
             {children}
         </AuthContext.Provider>
     )

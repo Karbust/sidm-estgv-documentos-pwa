@@ -1,0 +1,26 @@
+.loginPaper {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginAvatar {
+    margin: 8px;
+    background-color: $theme-secondary-color;
+}
+
+.loginForm {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.loginSubmit {
+    margin: 24px 0 16px;
+    height: 50px;
+}
+
+.loginBackdrop {
+    color: #fff;
+    z-index: 1201;
+}
