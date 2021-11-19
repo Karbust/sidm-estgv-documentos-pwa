@@ -4,6 +4,11 @@ import {
     LinkProps as RouterLinkProps,
     MemoryRouter as Router,
 } from 'react-router-dom'
+
+import '../../styles/NavigationStyle.css'
+
+import Sidebar from './Sidebar'
+
 import Menu from '@mui/material/Menu'
 import SpeedDial from '@mui/material/SpeedDial'
 import SpeedDialAction from '@mui/material/SpeedDialAction'
@@ -18,67 +23,86 @@ import MenuIcon from '@mui/icons-material/MenuOutlined'
 import SpeedDialIcon from '@mui/material/SpeedDialIcon'
 import BottomNavigation from '@mui/material/BottomNavigation'
 import TimelineIcon from '@mui/icons-material/TimelineOutlined'
-import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined'
+import FolderIcon from '@mui/icons-material/Folder'
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import AccountCircle from '@mui/icons-material/AccountCircleOutlined'
 import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined'
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined'
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Button from '@mui/material/Button'
+import Modal from '@mui/material/Modal'
+import Stack from '@mui/material/Stack'
+import AddIcon from '@mui/icons-material/Add'
+
+import Fab from '@mui/material/Fab';
+import NavigationIcon from '@mui/icons-material/Navigation';
 
 import '../../App.css'
 import { Link } from '@mui/material'
 
 import { MAIN_PATH } from '../Routes'
 
-const BottomNav = styled(BottomNavigation)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  background: linear-gradient(0deg, #F7F7F7, #F7F7F7), #FFFBFE;
-`
-
-const SpeedDialStyled = styled(SpeedDial)`
+const SpeedDialStyled = styled(Button)`
   position: absolute !important;
-  right: 0 !important;
-  margin-right: 16px !important;
+  right: 5% !important;
   bottom: 0 !important;
   margin-bottom: 74px !important;
-  
-  .MuiSpeedDialAction-staticTooltipLabel {
-    width: 103px;
-  }
+  width: 4rem;
+  height: 4rem;
 `
 
-const FabName = styled.div`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  text-transform: none;
-  /* identical to box height, or 143% */
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-  letter-spacing: 0.1px;
-
-  /* M3/sys/light/on-primary-container */
-
-  color: #21005D;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  margin: 0px 0px;
-`
+const style = {
+    transform: 'translate(0%, 0%)',
+    bgcolor: '#0c1222',
+    color: 'white',
+    border: 'none',
+    position: 'absolute',
+    width: '100%',
+    height: '14rem',
+    bottom: '0%',
+    left: '0',
+    textAlign: 'center',
+    fontFamily: '"Poppins"',
+};
 
 const speedDialActions: Array<{ icon: JSX.Element; name: string }> = [
     { icon: <CreateNewFolderOutlinedIcon />, name: 'Create Folder' },
-    { icon: <FolderOutlinedIcon />, name: 'Upload Folder' },
+    { icon: <FolderIcon />, name: 'Upload Folder' },
     { icon: <InsertDriveFileOutlinedIcon />, name: 'Upload File' },
 ]
+
+const StyledBurger = styled.button`
+  position: absolute;
+  top: 5%;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+  
+  &:focus {
+    outline: none;
+  }
+  
+  div {
+    width: 2rem;
+    height: 0.25rem;
+    background: ${({ theme }) => theme.primaryLight};
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+  }
+`;
 
 function Navigation() {
     const [value, setValue] = useState<number>(0)
@@ -93,65 +117,33 @@ function Navigation() {
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)
 
-    const handleClose = () => setAnchorEl(null)
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
 
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position='absolute'>
+                <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
                 <Toolbar>
-                    <IconButton
-                        size='large'
-                        edge='start'
-                        color='inherit'
-                        aria-label='menu'
-                        sx={{ mr: 2 }}
+                    <Typography
+                        variant='h6'
+                        component='div'
+                        sx={{ flexGrow: 1 }}
+                        style={{ alignItems: 'center', justifyContent: 'center', marginLeft: '45px'}}
                     >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant='h6' component='div' sx={{ flexGrow: 1 }} style={{ textAlign: 'center' }}>
                         SIDM
                     </Typography>
-                    {auth && (
-                        <div>
-                            <IconButton
-                                size='large'
-                                aria-label='account of current user'
-                                aria-controls='menu-appbar'
-                                aria-haspopup='true'
-                                onClick={handleMenu}
-                                color='inherit'
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                id='menu-appbar'
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                            </Menu>
-                        </div>
-                    )}
                 </Toolbar>
             </AppBar>
 
-            <SpeedDialStyled
+            {/*<SpeedDial
                 ariaLabel='SpeedDial tooltip example'
                 icon={<SpeedDialIcon />}
                 onClose={handleCloseSpeedDial}
                 onOpen={handleOpenSpeedDial}
                 open={openSpeedDial}
+                className='fabButton'
             >
                 {speedDialActions.map((action) => (
                     <SpeedDialAction
@@ -161,28 +153,65 @@ function Navigation() {
                         tooltipOpen
                     />
                 ))}
-            </SpeedDialStyled>
+            </SpeedDial>*/}
 
-            <BottomNav
+            <SpeedDialStyled onClick={handleOpen}><SpeedDialIcon /></SpeedDialStyled>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" style={{ marginTop: '16px', fontFamily: 'Poppins', fontSize: '1.2em'}}>
+                        Create New
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        {/*<Button variant="outlined" startIcon={<InsertDriveFileIcon />}>Upload File</Button> <br/>
+                        <Button variant="outlined" startIcon={<FolderIcon />}>Upload Folder</Button> <br/>
+                        <Button variant="outlined" startIcon={<CreateNewFolderIcon />}>Create Folder</Button>*/}
+                        <div className="d-grid gap-2 d-lg-block">
+                            <button className="btn btn-outline-primary secondaryButton btn-sm ms-3 mt-1 me-3" type="button"> <FolderIcon /> <br/>Folder</button>
+                            <button className="btn btn-primary primaryButton2 btn-sm ms-3 mt-2 me-3" type="button"> <FileUploadIcon /> <br/> Upload</button>
+                        </div>
+                    </Typography>
+                </Box>
+            </Modal>
+
+            <BottomNavigation
                 showLabels
                 value={value}
                 onChange={(event, newValue) => setValue(newValue)}
                 className='navBarBottom'
-                style={{ zIndex: 1100 }}
             >
                 <BottomNavigationAction
                     label='Files'
-                    icon={<InsertDriveFileOutlinedIcon />}
+                    icon={<FolderIcon />}
                     component={RouterLink}
                     to={`${MAIN_PATH}/Files`}
                 />
+
+                {/*<BottomNavigationAction
+                    icon={<AddIcon />}
+                    onClick={handleOpen}
+                    style={{background: '#FF7F50', color:'white', width: '50%'}}
+                />*/}
+
+                <button type="button" className="btn btn-primary primaryButton" onClick={handleOpen}><AddIcon /></button>
+
                 <BottomNavigationAction
                     label='Statistics'
                     icon={<TimelineIcon />}
                     component={RouterLink}
                     to={`${MAIN_PATH}/Statistics`}
                 />
-            </BottomNav>
+
+                {/*<BottomNavigationAction
+                    label='Menu'
+                    icon={<MenuIcon />}
+                    component={RouterLink}
+                />*/}
+            </BottomNavigation>
         </Box>
     )
 }
