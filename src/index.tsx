@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom'
 import Box from '@mui/system/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import { SnackbarProvider } from 'notistack'
-// @ts-ignore
 import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
 
 import './index.css'
-
 import App from './App'
+import * as serviceWorker from './serviceWorkerRegistration'
 
 export const primaryColor = '#2C343F'
 export const secondaryColor = '#696969'
 
 const theme = createTheme({
+    // @ts-ignore
     css: {
         primary: '#3f51b5',
         secondary: '#f50057'
@@ -58,3 +58,5 @@ ReactDOM.render(
     </StyledEngineProvider>,
     document.getElementById('root')
 )
+
+serviceWorker.register()

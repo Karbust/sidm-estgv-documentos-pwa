@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
 import { minifyHtml } from 'vite-plugin-html'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 
@@ -15,7 +16,19 @@ export default defineConfig({
   },
   plugins: [
     reactRefresh(),
-    minifyHtml()
+    minifyHtml(),
+    VitePWA({
+      srcDir: 'src',
+      registerType: 'autoUpdate',
+      strategies: 'injectManifest',
+      filename: 'service-worker.ts',
+      injectManifest: {
+        swSrc: './src/serviceWorkerWorkbox.ts'
+      },
+      workbox: {
+        cleanupOutdatedCaches: false,
+      }
+    })
   ],
   esbuild: {
     jsxInject: `import React from 'react'`

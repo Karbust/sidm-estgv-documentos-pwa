@@ -13,18 +13,3 @@ interface ImportMetaEnv extends Readonly<Record<string, string | boolean | undef
 interface ImportMeta {
     readonly env: ImportMetaEnv
 }
-
-declare module '@mui/material/styles' {
-    interface Theme {
-        css: {
-            primary: React.CSSProperties['color']
-            secondary: React.CSSProperties['color']
-        }
-    }
-    interface ThemeOptions {
-        css?: {
-            primary: React.CSSProperties['color']
-            secondary: React.CSSProperties['color']
-        }
-    }
-}
