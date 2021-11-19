@@ -1,0 +1,77 @@
+/*---Buttons---*/
+.primaryButton {
+    width: 5em;
+    background: #FF7F50;
+    border: none;
+    border-radius: 50px;
+}
+
+.primaryButton:visited {
+    background: #FF7F50;
+}
+
+.primaryButton:focus {
+    background: #FF7F50;
+    box-shadow: none !important;
+}
+
+.primaryButton:hover {
+    background: #FF7F50;
+}
+
+.primaryButton:active {
+    background: #FF7F50;
+}
+
+
+.primaryButton2 {
+    background: #FF7F50;
+    border: none;
+    border-radius: 50px;
+}
+
+.primaryButton2:visited {
+    background: #FF7F50;
+}
+
+.primaryButton2:focus {
+    background: #FF7F50;
+    box-shadow: none !important;
+}
+
+.primaryButton2:hover {
+    background: #e17046;
+}
+
+.primaryButton2:active {
+    background: #e17046;
+}
+
+.secondaryButton {
+    color: #FF7F50;
+    border-color: #FF7F50;
+    border-radius: 50px;
+}
+
+.secondaryButton:visited {
+    color: #FF7F50;
+    border-color: #FF7F50;
+}
+
+.secondaryButton:focus {
+    color: #FF7F50;
+    border-color: #FF7F50;
+    box-shadow: none !important;
+}
+
+.secondaryButton:hover {
+    background: #e17046;
+    color: white;
+    border-color: #e17046;
+}
+
+.secondaryButton:active {
+    background: #e17046;
+    color: white;
+}
+
