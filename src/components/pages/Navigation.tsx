@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import Box from '@mui/system/Box'
 import styled from '@emotion/styled'
@@ -17,6 +17,7 @@ import '../../App.css'
 import Sidebar from '../Sidebar'
 import { MAIN_PATH } from '../Routes'
 import '../../css/NavigationStyle.css'
+import IndexedDb from '../../indexedDb'
 
 const BottomNav = styled(BottomNavigation)`
   display: flex;
@@ -63,11 +64,34 @@ const BoxStyled = styled(Box)`
 
 function Navigation() {
     const [value, setValue] = useState<number>(0)
-    const [auth, setAuth] = useState<boolean>(true)
 
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
+
+    useEffect(() => {
+        const runIndexDb = async () => {
+            const indexedDb = new IndexedDb('test')
+            await indexedDb.createObjectStore(['books', 'students'])
+            await indexedDb.putValue('books', { name: 'A Game of Thrones' })
+            await indexedDb.putBulkValue('books', [{ name: 'A Song of Fire and Ice' }, { name: 'Harry Potter and the Chamber of Secrets' }])
+            await indexedDb.getValue('books', 1)
+            await indexedDb.getAllValue('books')
+            await indexedDb.deleteValue('books', 1)
+
+            const response = await fetch('https://scontent.fopo5-1.fna.fbcdn.net/v/t39.30808-6/258841483_1065106997604207_7128735727571181408_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=8bfeb9&_nc_eui2=AeHiP3S-0doGdEjXversh1_kdGlMN1JE4j50aUw3UkTiPu83TOXkgtu9N0-hJ_DmF_baZt4XlshTA0mIljOtK3hO&_nc_ohc=MiamnP4RwaoAX80ap61&_nc_ht=scontent.fopo5-1.fna&oh=17ca9718fa09d76040de24e12edc2908&oe=619D6FAC')
+            const imgBlob = await response.blob()
+
+            await indexedDb.putValue('students', { name: 'teste', content: imgBlob })
+
+            const responseiDb = await indexedDb.getValue('students', 1)
+            const url = URL.createObjectURL(responseiDb.content)
+            const img = new Image()
+            img.src = url
+            document.body.appendChild(img)
+        }
+        runIndexDb()
+    }, [])
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -100,9 +124,6 @@ function Navigation() {
                         Create New
                     </Typography>
                     <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                        {/*<Button variant="outlined" startIcon={<InsertDriveFileIcon />}>Upload File</Button> <br/>
-                        <Button variant="outlined" startIcon={<FolderIcon />}>Upload Folder</Button> <br/>
-                        <Button variant="outlined" startIcon={<CreateNewFolderIcon />}>Create Folder</Button>*/}
                         <div className='d-grid gap-2 d-lg-block'>
                             <button className='btn btn-outline-primary secondaryButton btn-sm ms-3 mt-1 me-3' type='button'>
                                 {' '}
