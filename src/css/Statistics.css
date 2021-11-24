@@ -1,0 +1,15 @@
+.charCard2 {
+    background: #1f1c1f;
+    border: none;
+    border-radius: 11px;
+    text-align: left;
+    margin-bottom: 2em !important;
+}
+
+.charCard3 {
+    background: none;
+    border: none;
+    border-radius: 11px;
+    text-align: left;
+}
+

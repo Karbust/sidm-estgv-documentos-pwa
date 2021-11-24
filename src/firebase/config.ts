@@ -9,13 +9,14 @@ import { getDatabase } from 'firebase/database'
 console.log(import.meta.env)
 // Your web app's Firebase configuration
 const firebaseConfig: FirebaseOptions = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTHDOMAIN,
-    databaseURL: import.meta.env.VITE_FIREBASE_DATABASEURL,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID
+    apiKey: "AIzaSyDdB5WGrSBgQJQFiIS9P9uCIEJN0yizHuE",
+    authDomain: "sidm-estgv.firebaseapp.com",
+    databaseURL:
+        "https://sidm-estgv-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "sidm-estgv",
+    storageBucket: "sidm-estgv.appspot.com",
+    messagingSenderId: "181968804380",
+    appId: "1:181968804380:web:484f4b3cda17694b40ddd9",
 }
 
 // Initialize Firebase

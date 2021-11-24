@@ -8,6 +8,7 @@ import Toolbar from '@mui/material/Toolbar'
 import AddIcon from '@mui/icons-material/Add'
 import Typography from '@mui/material/Typography'
 import FolderIcon from '@mui/icons-material/Folder'
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import BottomNavigation from '@mui/material/BottomNavigation'
 import TimelineIcon from '@mui/icons-material/TimelineOutlined'
@@ -17,6 +18,7 @@ import '../../App.css'
 import Sidebar from '../Sidebar'
 import { MAIN_PATH } from '../Routes'
 import '../../css/NavigationStyle.css'
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const BottomNav = styled(BottomNavigation)`
   display: flex;
@@ -28,33 +30,34 @@ const BottomNav = styled(BottomNavigation)`
   height: 4rem;
   bottom: 0%;
   left: 0;
-  background: #0c1222;
-  font-family: "Poppins", sans-serif !important;
+  background: #1f1c1f;
   z-index: 1;
   
   .MuiBottomNavigationAction-root {
     color: white;
+    border-radius: 11px;
     z-index: 1;
   }
 
   .MuiBottomNavigationAction-label {
-    font-size: 0.9em;
+    font-size: 0.92em;
+    font-family: "Poppins", sans-serif !important;
   }
 
   .Mui-selected {
-    color: #FF7F50 !important;
-    border-radius: 50px;
+    color: #E40B0B !important; 
+    border-radius: 11px;
   }
 `
 
 const BoxStyled = styled(Box)`
   transform: translate(0%, 0%);
-  background-color: #0c1222;
+  background-color: #1f1c1f;
   color: white;
   border: none;
-  position: absolute;
+  position: fixed;
   width: 100%;
-  height: 14rem;
+  height: fit-content;
   bottom: 0;
   left: 0;
   text-align: center;
@@ -66,23 +69,23 @@ function Navigation() {
     const [auth, setAuth] = useState<boolean>(true)
 
     const [open, setOpen] = useState(false)
-    const handleOpen = () => setOpen(true)
+    const handleOpen = () => setOpen(!open)
     const handleClose = () => setOpen(false)
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position='absolute' style={{ backgroundColor: '#0c1222' }}>
+            <AppBar position='absolute' style={{ boxShadow: 'none' }}>
                 <Sidebar />
                 <Toolbar style={{
                     minHeight: '4em',
-                    backgroundColor: '#0c1222'
+                    background: '#1F1C1F'
                 }}
                 >
                     <Typography
                         variant='h6'
                         component='div'
                         sx={{ flexGrow: 1 }}
-                        style={{ alignItems: 'center', justifyContent: 'center', marginLeft: '45px' }}
+                        style={{ alignItems: 'center', justifyContent: 'center', marginLeft: '45px', fontFamily: 'Poppins' }}
                     >
                         SIDM
                     </Typography>
@@ -96,28 +99,25 @@ function Navigation() {
                 aria-describedby='modal-modal-description'
             >
                 <BoxStyled>
-                    <Typography id='modal-modal-title' variant='h6' style={{ marginTop: '16px', fontFamily: 'Poppins', fontSize: '1.2em' }}>
+                    <Typography id='modal-modal-title' variant='h6' style={{ marginTop: '1em', marginBottom: '1em', fontFamily: 'Poppins', fontSize: '1em' }}>
                         Create New
                     </Typography>
-                    <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                        {/*<Button variant="outlined" startIcon={<InsertDriveFileIcon />}>Upload File</Button> <br/>
-                        <Button variant="outlined" startIcon={<FolderIcon />}>Upload Folder</Button> <br/>
-                        <Button variant="outlined" startIcon={<CreateNewFolderIcon />}>Create Folder</Button>*/}
-                        <div className='d-grid gap-2 d-lg-block'>
-                            <button className='btn btn-outline-primary secondaryButton btn-sm ms-3 mt-1 me-3' type='button'>
-                                {' '}
-                                <FolderIcon />
-                                {' '}
-                                <br />
-                                Folder
+                    <Typography id='modal-modal-description'>
+                        {/*<div className='d-grid d-lg-block'>
+                            <button className='btn btn-primary btn-lg secondaryButton' type='button'>
+                                <FolderIcon/>&nbsp;&nbsp;Folder
                             </button>
-                            <button className='btn btn-primary primaryButton2 btn-sm ms-3 mt-2 me-3' type='button'>
-                                {' '}
-                                <FileUploadIcon />
-                                {' '}
-                                <br />
-                                {' '}
-                                Upload
+                            <button className='btn btn-primary btn-lg primaryButton2' type='button'>
+                                <FileUploadIcon />&nbsp;Upload
+                            </button>
+                        </div>*/}
+
+                        <div className="btn-group col-12" style={{marginBottom: '16px'}} role="group" aria-label="Basic example">
+                            <button className='btn btn-primary btn-lg secondaryButton' type='button'>
+                                <CreateNewFolderIcon/>&nbsp;&nbsp;Folder
+                            </button>
+                            <button className='btn btn-primary btn-lg primaryButton2' type='button'>
+                                <FileUploadIcon />&nbsp;Upload
                             </button>
                         </div>
                     </Typography>
@@ -129,7 +129,7 @@ function Navigation() {
                 value={value}
                 onChange={(event, newValue) => setValue(newValue)}
                 className='navBarBottom'
-                style={{ zIndex: 1100 }}
+                style={{ zIndex: 1 }}
             >
                 <BottomNavigationAction
                     label='Files'
