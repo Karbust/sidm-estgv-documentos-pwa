@@ -1,77 +1,87 @@
 /*---Buttons---*/
 .primaryButton {
     width: 5em;
-    background: #FF7F50;
+    background: #403d39;
     border: none;
-    border-radius: 50px;
+    border-radius: 11px;
 }
 
 .primaryButton:visited {
-    background: #FF7F50;
+    background: #403d39;
 }
 
 .primaryButton:focus {
-    background: #FF7F50;
+    background: #403d39;
     box-shadow: none !important;
 }
 
 .primaryButton:hover {
-    background: #FF7F50;
+    background: #E40B0B;
 }
 
 .primaryButton:active {
-    background: #FF7F50;
+    background: #E40B0B;
 }
 
 
 .primaryButton2 {
-    background: #FF7F50;
+    background: #E40B0B;
     border: none;
-    border-radius: 50px;
+    border-radius: 11px !important;
+    margin-left: 16px;
+    margin-right: 16px;
+    font-size: 1em;
+    font-family: 'Poppins', 'Roboto', sans-serif;
 }
 
 .primaryButton2:visited {
-    background: #FF7F50;
+    background: #E40B0B;
 }
 
 .primaryButton2:focus {
-    background: #FF7F50;
+    background: #E40B0B;
     box-shadow: none !important;
 }
 
 .primaryButton2:hover {
-    background: #e17046;
+    background: #C30E0E;
 }
 
 .primaryButton2:active {
-    background: #e17046;
+    background: #E40B0B;
 }
 
 .secondaryButton {
-    color: #FF7F50;
-    border-color: #FF7F50;
-    border-radius: 50px;
+    background: #403d39;
+    border: none;
+    text-decoration: none;
+    border-radius: 11px !important;
+    margin-left: 16px;
+    margin-right: 16px;
+    font-size: 1em;
+    font-family: 'Poppins', 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .secondaryButton:visited {
-    color: #FF7F50;
-    border-color: #FF7F50;
+    color: #E40B0B;
 }
 
 .secondaryButton:focus {
-    color: #FF7F50;
-    border-color: #FF7F50;
+    color: #C30E0E;
     box-shadow: none !important;
 }
 
 .secondaryButton:hover {
-    background: #e17046;
+    background: #E40B0B;
     color: white;
-    border-color: #e17046;
 }
 
 .secondaryButton:active {
-    background: #e17046;
+    background: #C30E0E;
     color: white;
+    box-shadow: none !important;
 }
 
