@@ -14,7 +14,7 @@ import UserImageMockup from "../images/Vi_OriginalCentered.jpg";
 import ProgressBar from "./progress-bar.component";
 import { MAIN_PATH } from "./Routes";
 
-const testData = [{ bgcolor: "#E40B0B", completed: 46 }];
+const testData = [{ bgcolor: "#0178d4", completed: 46 }];
 
 const Sidebar: FunctionComponent = () => (
   <Menu>
@@ -32,7 +32,7 @@ const Sidebar: FunctionComponent = () => (
       }}
     />
     <p style={{ fontSize: "1.4em", marginBottom: "0px" }}>Margot Robbie</p>
-    <p style={{ fontSize: "0.8em", color: "#E40B0B" }}>margot@email.com</p>
+    <p style={{ fontSize: "0.8em", color: "#0178d4" }}>margot@email.com</p>
     <button type="button" className="btn btn-outline-primary btn-lg editButton">
       {/*<LogoutIcon/> */}
       Edit Profile

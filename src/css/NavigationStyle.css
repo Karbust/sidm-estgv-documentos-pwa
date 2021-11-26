@@ -1,87 +1,85 @@
 /*---Buttons---*/
 .primaryButton {
-    width: 5em;
-    background: #403d39;
-    border: none;
-    border-radius: 11px;
+  width: 5em;
+  background: #403d39;
+  border: none;
+  border-radius: 11px;
 }
 
 .primaryButton:visited {
-    background: #403d39;
+  background: #403d39;
 }
 
 .primaryButton:focus {
-    background: #403d39;
-    box-shadow: none !important;
+  background: #403d39;
+  box-shadow: none !important;
 }
 
 .primaryButton:hover {
-    background: #E40B0B;
+  background: #0266b3;
 }
 
 .primaryButton:active {
-    background: #E40B0B;
+  background: #0178d4;
 }
 
-
 .primaryButton2 {
-    background: #E40B0B;
-    border: none;
-    border-radius: 11px !important;
-    margin-left: 16px;
-    margin-right: 16px;
-    font-size: 1em;
-    font-family: 'Poppins', 'Roboto', sans-serif;
+  background: #0178d4;
+  border: none;
+  border-radius: 11px !important;
+  margin-left: 16px;
+  margin-right: 16px;
+  font-size: 1em;
+  font-family: "Poppins", "Roboto", sans-serif;
 }
 
 .primaryButton2:visited {
-    background: #E40B0B;
+  background: #0178d4;
 }
 
 .primaryButton2:focus {
-    background: #E40B0B;
-    box-shadow: none !important;
+  background: #0178d4;
+  box-shadow: none !important;
 }
 
 .primaryButton2:hover {
-    background: #C30E0E;
+  background: #0266b3;
 }
 
 .primaryButton2:active {
-    background: #E40B0B;
+  background: #0178d4;
 }
 
 .secondaryButton {
-    background: #403d39;
-    border: none;
-    text-decoration: none;
-    border-radius: 11px !important;
-    margin-left: 16px;
-    margin-right: 16px;
-    font-size: 1em;
-    font-family: 'Poppins', 'Roboto', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: #403d39;
+  border: none;
+  text-decoration: none;
+  border-radius: 11px !important;
+  margin-left: 16px;
+  margin-right: 16px;
+  font-size: 1em;
+  font-family: "Poppins", "Roboto", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .secondaryButton:visited {
-    color: #E40B0B;
+  color: #0178d4;
 }
 
 .secondaryButton:focus {
-    color: #C30E0E;
-    box-shadow: none !important;
+  color: #0178d4;
+  box-shadow: none !important;
 }
 
 .secondaryButton:hover {
-    background: #E40B0B;
-    color: white;
+  background: #0266b3;
+  color: white;
 }
 
 .secondaryButton:active {
-    background: #C30E0E;
-    color: white;
-    box-shadow: none !important;
+  background: #0178d4;
+  color: white;
+  box-shadow: none !important;
 }
-

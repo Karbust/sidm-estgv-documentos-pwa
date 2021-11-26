@@ -1,35 +1,35 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: fixed;
-    width: 1.4em;
-    height: 1em;
-    left: 21px;
-    top: 24px;
+  position: fixed;
+  width: 1.4em;
+  height: 1em;
+  left: 21px;
+  top: 24px;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-    background: white;
+  background: white;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-    background: white;
-    border: 1px solid white;
+  background: white;
+  border: 1px solid white;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-    position: fixed;
-    height: 20px;
-    width: 20px;
-    right: 0px;
-    top: 16px;
+  position: fixed;
+  height: 20px;
+  width: 20px;
+  right: 0px;
+  top: 16px;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-    background: white;
+  background: white;
 }
 
 /*
@@ -37,165 +37,164 @@ Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
 .bm-menu-wrap {
-    position: static;
-    width: 100vw !important;
+  position: static;
+  width: 100vw !important;
 }
 
 /* General sidebar styles */
 .bm-menu {
-    background: #1f1c1f;
-    font-size: 1.2em;
-    width: 100vw;
-    padding: 0em 0em 0em 0em;
+  background: #1f1c1f;
+  font-size: 1.2em;
+  width: 100vw;
+  padding: 0em 0em 0em 0em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-    fill: #0c1222;
+  fill: #0c1222;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-    padding: 0px;
-    margin-right: 16px;
-    margin-left: 16px;
-    display:flex;
-    flex-direction:column;
-    flex:1;
-    font-size: 16px;
+  padding: 0px;
+  margin-right: 16px;
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 16px;
 }
 
 /* Individual item */
 .bm-item {
-    color: white;
-    margin-bottom: 10px;
-    text-align: center;
-    text-decoration: none;
-    justify-content: center;
-    font-size: 1em;
+  color: white;
+  margin-bottom: 10px;
+  text-align: center;
+  text-decoration: none;
+  justify-content: center;
+  font-size: 1em;
 }
 
 /* Styling of overlay */
 .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .bm-item:hover {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .editButton {
-    margin-right: auto;
-    margin-left: auto;
-    width: fit-content;
-    border-color: #E40B0B;
-    color: white;
-    border-radius: 11px;
-    font-size: 0.8em;
-    margin-bottom: 0px;
+  margin-right: auto;
+  margin-left: auto;
+  width: fit-content;
+  border-color: #0178d4;
+  color: white;
+  border-radius: 11px;
+  font-size: 0.8em;
+  margin-bottom: 0px;
 }
 
 .editButton:visited {
-    color: white;
-    background: none;
+  color: white;
+  background: none;
 }
 
 .editButton:focus {
-    color: white;
-    box-shadow: none !important;
-    border-color: #C30E0E;
+  color: white;
+  box-shadow: none !important;
+  border-color: #0266b3;
 }
 
 .editButton:hover {
-    background: #C30E0E;
-    color: white;
-    border-color: #C30E0E;
+  background: #0266b3;
+  color: white;
+  border-color: #0266b3;
 }
 
 .editButton:active {
-    background: #E40B0B;
-    color: white;
-    box-shadow: none !important;
+  background: #0178d4;
+  color: white;
+  box-shadow: none !important;
 }
 
 .line {
-    margin-top: 2em;
-    margin-bottom: 2em;
-    width: 100%;
-    border: 1px solid;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  width: 100%;
+  border: 1px solid;
 }
 
 .charCard {
-    border-color: #E40B0B;
-    background: none;
-    border-radius: 11px;
-    text-align: left;
-    margin-bottom: 16px !important;
+  border-color: #0178d4;
+  background: none;
+  border-radius: 11px;
+  text-align: left;
+  margin-bottom: 16px !important;
 }
 
 .menuButtons {
-    width: 100%;
-    color: white !important;
-    background: #403d39;
-    border: none;
-    border-radius: 11px;
-    text-align: left;
-    font-size: 1em;
+  width: 100%;
+  color: white !important;
+  background: #403d39;
+  border: none;
+  border-radius: 11px;
+  text-align: left;
+  font-size: 1em;
 }
 
 .menuButtons:visited {
-    color: white;
-    background: none;
+  color: white;
+  background: none;
 }
 
 .menuButtons:focus {
-    color: white;
-    box-shadow: none !important;
-    border-color: #C30E0E;
+  color: white;
+  box-shadow: none !important;
+  border-color: #0266b3;
 }
 
 .menuButtons:hover {
-    background: #C30E0E;
-    color: white;
+  background: #0266b3;
+  color: white;
 }
 
 .menuButtons:active {
-    background: #E40B0B;
-    color: white;
-    box-shadow: none !important;
+  background: #0178d4;
+  color: white;
+  box-shadow: none !important;
 }
 
 .aTagButtons {
-    color: white;
-    text-decoration: none;
-    align-items: center;
-    vertical-align: center;
+  color: white;
+  text-decoration: none;
+  align-items: center;
+  vertical-align: center;
 }
 
 .logOutButton {
-    margin-top: auto;
-    margin-bottom: 16px;
-    width: 100%;
-    background: #E40B0B;
-    border: none;
-    border-radius: 11px;
-    font-size: 1em;
+  margin-top: auto;
+  margin-bottom: 16px;
+  width: 100%;
+  background: #0178d4;
+  border: none;
+  border-radius: 11px;
+  font-size: 1em;
 }
 
 .logOutButton:visited {
-    background: #E40B0B;
+  background: #0178d4;
 }
 
 .logOutButton:hover {
-    background: #E40B0B;
+  background: #0266b3;
 }
 
 .logOutButton:active {
-    background: #E40B0B;
+  background: #0178d4;
 }
 
 .logOutButton:focus {
-    background: #E40B0B;
-    box-shadow: none !important;
+  background: #0178d4;
+  box-shadow: none !important;
 }
-
