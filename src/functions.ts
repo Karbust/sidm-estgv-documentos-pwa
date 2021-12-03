@@ -1,5 +1,7 @@
 import { SetStateAction, useState } from 'react'
-import { FullMetadata, getMetadata, listAll, ref } from 'firebase/storage'
+import {
+    deleteObject, FullMetadata, getMetadata, listAll, ref, StorageReference
+} from 'firebase/storage'
 import {
     collection, DocumentData, getDocs, query, where, getDoc, doc
 } from 'firebase/firestore'
@@ -50,7 +52,7 @@ export const getCurrentFolder = (): string => {
 }
 
 interface listAllFilesProps {
-    setFolders: (value: SetStateAction<string[]>) => void
+    setFolders: (value: SetStateAction<StorageReference[] | null>) => void
     setFiles: (value: SetStateAction<FullMetadata[] | null>) => void
     route?: string
 }
@@ -59,7 +61,7 @@ export const listAllFiles = ({ setFolders, setFiles, route = '' }: listAllFilesP
     const storageRef = ref(storage, `uploads/${auth.currentUser?.uid}/${route}`)
     listAll(storageRef)
         .then(async (res) => {
-            setFolders(res.prefixes.map((value) => value.name))
+            setFolders(res.prefixes.map((value) => value))
 
             const data = await Promise.all(res.items.map(async (value) => {
                 const itemRef = ref(storage, value.fullPath)
@@ -115,4 +117,66 @@ export const humanFileSize = (bytes: number, si = false, dp = 1): string => {
     } while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1)
 
     return `${bytes.toFixed(dp)} ${units[u]}`
+}
+
+export const _saveBlob = (response: any, fileName: string) => {
+    const a = document.createElement('a')
+    document.body.appendChild(a)
+    a.style = 'display: none'
+    a.href = window.URL.createObjectURL(response)
+    a.download = fileName
+    a.click()
+    document.body.removeChild(a)
+}
+
+export const errorDownloadUrlFirebase = (error: any) => {
+    let reason: string
+    switch (error.code) {
+        case 'storage/object-not-found':
+            reason = 'storage/object-not-found'
+            console.log('storage/object-not-found')
+            break
+
+        case 'storage/unauthorized':
+            reason = 'storage/unauthorized'
+            console.log('storage/unauthorized')
+            break
+
+        case 'storage/canceled':
+            reason = 'storage/canceled'
+            console.log('storage/canceled')
+            break
+
+        case 'storage/unknown':
+            reason = 'storage/unknown'
+            console.log('storage/unknown')
+            break
+
+        default:
+            reason = 'Unknown Error.'
+            console.log('Unknown Error.')
+            break
+    }
+    return reason
+}
+
+export const deleteFolderContents = (path: string, dispatch: any, state: any) => {
+    const refFolder = ref(storage, path)
+    return listAll(refFolder)
+        .then((dir) => {
+            dir.items.forEach(async (fileRef) => {
+                await deleteObject(ref(storage, fileRef.fullPath))
+
+                dispatch({
+                    type: 'SET_UPDATE',
+                    payload: state.update + 1
+                })
+            })
+            dir.prefixes.forEach(async (folderRef) => {
+                await deleteFolderContents(folderRef.fullPath, dispatch, state)
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 }

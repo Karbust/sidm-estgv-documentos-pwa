@@ -35,7 +35,7 @@ const FormikRegister: FunctionComponent<Props> = ({ handleClose, handleToggle })
                 formikActions.setStatus(1)
                 formikActions.resetForm()
                 setIsAuthenticated(true)
-                enqueueSnackbar('Autenticado com sucesso.', {
+                enqueueSnackbar('Registration successful.', {
                     variant: 'success',
                 })
 
@@ -48,7 +48,6 @@ const FormikRegister: FunctionComponent<Props> = ({ handleClose, handleToggle })
             .catch((error) => {
                 const errorCode = error.code
                 const errorMessage = error.message
-                console.log({ errorCode, errorMessage })
                 enqueueSnackbar(errorMessage, {
                     variant: 'error',
                 })
