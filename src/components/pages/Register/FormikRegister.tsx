@@ -2,8 +2,9 @@ import { FunctionComponent, useContext } from 'react'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { useSnackbar } from 'notistack'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
 
-import { auth } from '../../../firebase/config'
+import { auth, db } from '../../../firebase/config'
 import { AuthContext } from '../../AuthContext'
 import { RegisterInput } from '../../../types/typesForms'
 
@@ -29,13 +30,19 @@ const FormikRegister: FunctionComponent<Props> = ({ handleClose, handleToggle })
         setIsLoading(true)
 
         return createUserWithEmailAndPassword(auth, values.email, values.password)
-            .then((response) => {
+            .then(async (response) => {
                 console.log(response)
                 formikActions.setStatus(1)
                 formikActions.resetForm()
                 setIsAuthenticated(true)
                 enqueueSnackbar('Autenticado com sucesso.', {
                     variant: 'success',
+                })
+
+                await setDoc(doc(db, 'users', response.user.uid), {
+                    fullName: values.fullName,
+                    email: values.email,
+                    userId: response.user.uid
                 })
             })
             .catch((error) => {
@@ -64,7 +71,6 @@ const FormikRegister: FunctionComponent<Props> = ({ handleClose, handleToggle })
                 fullName: '',
                 email: '',
                 password: '',
-                passwordConfirm: ''
             }}
         >
             {({ status }) => (

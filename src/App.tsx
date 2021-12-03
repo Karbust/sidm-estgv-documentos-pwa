@@ -11,6 +11,7 @@ import AuthContextProvider, { AuthContext } from './components/AuthContext'
 
 const Navigation = lazy(() => import('./components/pages/Navigation'))
 const Login = lazy(() => import('./components/pages/Login/Login'))
+const Register = lazy(() => import('./components/pages/Register/Register'))
 
 const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({ component: Component, ...otherProps }) => {
     const { isLoading, isAuthenticated } = useContext(AuthContext)
@@ -65,6 +66,9 @@ const App: FunctionComponent = () => (
                     <Route path='/Login'>
                         <LoginPage />
                     </Route>
+                    <Route path='/Register'>
+                        <RegisterPage />
+                    </Route>
                     <PrivateRoute path='/Logout' component={Logout} />
                     <Route path='*' exact>
                         <Redirect to='/' />
@@ -81,6 +85,14 @@ const LoginPage = () => {
     return isAuthenticated
         ? <Redirect to='/Dashboard' />
         : <Login />
+}
+
+const RegisterPage = () => {
+    const { isAuthenticated } = useContext(AuthContext)
+
+    return isAuthenticated
+        ? <Redirect to='/Dashboard' />
+        : <Register />
 }
 
 const Logout = () => {

@@ -8,12 +8,12 @@ import { RegisterInput } from '../../../types/typesForms'
 
 const FormLogin: FunctionComponent = () => {
     const {
-        isValid, isSubmitting, validateField
+        isValid, isSubmitting, validateField, values
     } = useFormikContext<RegisterInput>()
 
     return (
         <>
-            <Field name='email'>
+            <Field name='fullName'>
                 {({ field, form: { errors } }: FieldProps<RegisterInput>) => (
                     <TextField
                         {...field}
@@ -22,6 +22,25 @@ const FormLogin: FunctionComponent = () => {
                         required
                         fullWidth
                         autoFocus
+                        label='Full Name'
+                        inputProps={{
+                            'aria-label': 'Full Name',
+                            'minLength': 2
+                        }}
+                        error={Boolean(errors.fullName)}
+                        helperText={errors.fullName}
+                        onBlur={(event: { currentTarget: { name: string } }) => validateField(event.currentTarget.name)}
+                    />
+                )}
+            </Field>
+            <Field name='email'>
+                {({ field, form: { errors } }: FieldProps<RegisterInput>) => (
+                    <TextField
+                        {...field}
+                        variant='outlined'
+                        margin='normal'
+                        required
+                        fullWidth
                         label='Email'
                         inputProps={{
                             'aria-label': 'Email',
@@ -29,7 +48,7 @@ const FormLogin: FunctionComponent = () => {
                         }}
                         error={Boolean(errors.email)}
                         helperText={errors.email}
-                        onBlur={(event: { currentTarget: { name: string } }) => validateField(event.currentTarget.name)}
+                        onBlur={(event) => validateField(event.currentTarget.name)}
                     />
                 )}
             </Field>

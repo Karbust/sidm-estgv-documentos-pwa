@@ -1,7 +1,7 @@
 import { SetStateAction, useState } from 'react'
 import { FullMetadata, getMetadata, listAll, ref } from 'firebase/storage'
 import {
-    collection, DocumentData, getDocs, query, where
+    collection, DocumentData, getDocs, query, where, getDoc, doc
 } from 'firebase/firestore'
 import queryString from 'query-string'
 
@@ -17,6 +17,31 @@ export const useForceUpdate = (): () => void => {
 
 export interface parsedType {
     folder?: string
+}
+
+export const getCurrentUser = async (isOnline: boolean): Promise<DocumentData | null> => {
+    if (isOnline) {
+        const docRef = doc(db, 'users', auth.currentUser?.uid ?? '')
+        const docSnap = await getDoc(docRef)
+
+        if (docSnap.exists()) {
+            console.log('Document data:', docSnap.data())
+        } else {
+            // doc.data() will be undefined in this case
+            console.log('No such document!')
+        }
+
+        localStorage.setItem('userData', JSON.stringify(docSnap.exists() ? docSnap.data() : ''))
+
+        return docSnap.exists() ? docSnap.data() : null
+    }
+
+    const userData = localStorage.getItem('userData')
+    if (userData && userData !== '') {
+        return JSON.parse(userData)
+    }
+
+    return null
 }
 
 export const getCurrentFolder = (): string => {
@@ -45,12 +70,7 @@ export const listAllFiles = ({ setFolders, setFiles, route = '' }: listAllFilesP
         .catch(console.error)
 }
 
-interface getAllMetadataProps {
-    path: string
-}
-
 export const getAllDocs = async () => {
-    console.log(auth.currentUser?.uid)
     const q = query(collection(db, 'documents'), where('owner', '==', auth.currentUser?.uid))
 
     return getDocs(q)

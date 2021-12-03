@@ -17,10 +17,13 @@ import queryString from 'query-string'
 
 import { humanFileSize, listAllFiles, MAIN_PATH, parsedType } from '../../functions'
 import { Context } from '../../reducer/Store'
+import { useOnlineStatus } from '../../lib/useOnlineStatus'
 
 const Files: FunctionComponent = () => {
     // @ts-ignore
     const { state } = useContext(Context)
+
+    const isOnline = useOnlineStatus()
 
     const parsed: parsedType = queryString.parse(window.location.search)
 
@@ -29,7 +32,7 @@ const Files: FunctionComponent = () => {
 
     useEffect(() => {
         listAllFiles({ setFolders, setFiles, route: parsed.folder ?? '' })
-    }, [parsed.folder, state.update])
+    }, [parsed.folder, state.update, isOnline])
 
     return (
         <div style={{ paddingBottom: '56px' }}>
