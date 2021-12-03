@@ -1,6 +1,6 @@
 import { createContext, FunctionComponent, useEffect, useState } from 'react'
-import { useSnackbar } from 'notistack'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { useSnackbar } from 'notistack'
 
 import { AuthProps, IContextProps } from '../types/typesAuthProvider'
 import { auth } from '../firebase/config'
@@ -13,17 +13,19 @@ const AuthContextProvider: FunctionComponent<AuthProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            console.log('We are authenticated now!')
-            setIsAuthenticated(true)
-        } else {
-            setIsAuthenticated(false)
-        }
-        setIsLoading(false)
-    })
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log('We are authenticated now!')
+                setIsAuthenticated(true)
+            } else {
+                setIsAuthenticated(false)
+            }
+            setIsLoading(false)
+        })
+    }, [])
 
-    const logout = (): void => {
+    const logout = async (): Promise<void> => {
         signOut(auth)
             .then(() => {
                 setIsAuthenticated(false)

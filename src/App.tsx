@@ -4,6 +4,7 @@ import Box from '@mui/material/Box'
 import styled from '@emotion/styled'
 import CircularProgress from '@mui/material/CircularProgress'
 
+import Store from './reducer/Store'
 import Routes from './components/Routes'
 import { PrivateRouteProps } from './types/typesAuthProvider'
 import AuthContextProvider, { AuthContext } from './components/AuthContext'
@@ -44,7 +45,7 @@ const Main = styled.main`
 `
 
 const MainComponent: FunctionComponent = () => (
-    <div style={{ display: 'flex' }}>
+    <div>
         <Main>
             <Navigation />
             <Routes />
@@ -54,21 +55,23 @@ const MainComponent: FunctionComponent = () => (
 
 const App: FunctionComponent = () => (
     <AuthContextProvider>
-        <Router>
-            <Switch>
-                <Route path='/' exact>
-                    <Redirect push to='/Dashboard' />
-                </Route>
-                <PrivateRoute path='/Dashboard' component={MainComponent} />
-                <Route path='/Login'>
-                    <LoginPage />
-                </Route>
-                <PrivateRoute path='/Logout' component={Logout} />
-                <Route path='*' exact>
-                    <Redirect to='/' />
-                </Route>
-            </Switch>
-        </Router>
+        <Store>
+            <Router>
+                <Switch>
+                    <Route path='/' exact>
+                        <Redirect push to='/Dashboard' />
+                    </Route>
+                    <PrivateRoute path='/Dashboard' component={MainComponent} />
+                    <Route path='/Login'>
+                        <LoginPage />
+                    </Route>
+                    <PrivateRoute path='/Logout' component={Logout} />
+                    <Route path='*' exact>
+                        <Redirect to='/' />
+                    </Route>
+                </Switch>
+            </Router>
+        </Store>
     </AuthContextProvider>
 )
 

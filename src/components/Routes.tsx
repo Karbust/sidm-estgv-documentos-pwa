@@ -4,8 +4,6 @@ import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 import RoutesList from './RoutesList'
 
-export const MAIN_PATH = '/Dashboard'
-
 const Routes: FunctionComponent = () => {
     const { path } = useRouteMatch()
 

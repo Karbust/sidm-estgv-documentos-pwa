@@ -88,7 +88,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
     margin-right: auto;
     margin-left: auto;
     width: fit-content;
-    border-color: #E40B0B;
+    border-color: #0178D4;
     color: white;
     border-radius: 11px;
     font-size: 0.8em;
@@ -103,17 +103,17 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .editButton:focus {
     color: white;
     box-shadow: none !important;
-    border-color: #C30E0E;
+    border-color: #0266B3;
 }
 
 .editButton:hover {
-    background: #C30E0E;
+    background: #0266B3;
     color: white;
-    border-color: #C30E0E;
+    border-color: #0266B3;
 }
 
 .editButton:active {
-    background: #E40B0B;
+    background: #0178D4;
     color: white;
     box-shadow: none !important;
 }
@@ -126,7 +126,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .charCard {
-    border-color: #E40B0B;
+    border-color: #0178D4;
     background: none;
     border-radius: 11px;
     text-align: left;
@@ -151,16 +151,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .menuButtons:focus {
     color: white;
     box-shadow: none !important;
-    border-color: #C30E0E;
+    border-color: #0266B3;
 }
 
 .menuButtons:hover {
-    background: #C30E0E;
+    background: #0266B3;
     color: white;
 }
 
 .menuButtons:active {
-    background: #E40B0B;
+    background: #0178D4;
     color: white;
     box-shadow: none !important;
 }
@@ -176,26 +176,26 @@ Note: Beware of modifying this element as it can break the animations - you shou
     margin-top: auto;
     margin-bottom: 16px;
     width: 100%;
-    background: #E40B0B;
+    background: #0178D4;
     border: none;
     border-radius: 11px;
     font-size: 1em;
 }
 
 .logOutButton:visited {
-    background: #E40B0B;
+    background: #0178D4;
 }
 
 .logOutButton:hover {
-    background: #E40B0B;
+    background: #0178D4;
 }
 
 .logOutButton:active {
-    background: #E40B0B;
+    background: #0178D4;
 }
 
 .logOutButton:focus {
-    background: #E40B0B;
+    background: #0178D4;
     box-shadow: none !important;
 }
 

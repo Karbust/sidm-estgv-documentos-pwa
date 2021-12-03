@@ -6,7 +6,7 @@ export interface IContextProps {
     isAuthenticated: boolean
     setIsLoading: (value: SetStateAction<boolean>) => void
     setIsAuthenticated: (value: SetStateAction<boolean>) => void
-    logout: () => void
+    logout: () => Promise<void>
 }
 
 export interface AuthProps {

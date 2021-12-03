@@ -8,6 +8,7 @@ import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material/
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorkerRegistration'
+import { OnlineStatusProvider } from './lib/useOnlineStatus'
 
 export const primaryColor = '#2C343F'
 export const secondaryColor = '#696969'
@@ -51,7 +52,9 @@ ReactDOM.render(
                         horizontal: 'right'
                     }}
                 >
-                    <App />
+                    <OnlineStatusProvider>
+                        <App />
+                    </OnlineStatusProvider>
                 </SnackbarProvider>
             </Suspense>
         </ThemeProvider>

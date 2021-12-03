@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import styled from '@emotion/styled'
 import Avatar from '@mui/material/Avatar'
 import Backdrop from '@mui/material/Backdrop'
@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import '../../../css/login.css'
 
-import FormikLogin from './FormikLogin'
+import FormikRegister from './FormikRegister'
 
 const LoginPaper = styled.div`
   margin-top: 64px;
@@ -46,9 +46,9 @@ const Login: FunctionComponent = () => {
                         <FontAwesomeIcon icon={faUserLock} />
                     </LoginAvatar>
                     <Typography component='h1' variant='h5'>
-                        Sign in
+                        Sign Up
                     </Typography>
-                    <FormikLogin
+                    <FormikRegister
                         handleClose={handleClose}
                         handleToggle={handleToggle}
                     />

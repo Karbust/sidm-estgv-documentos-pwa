@@ -3,7 +3,7 @@ import { IDBPDatabase, openDB } from 'idb'
 class IndexedDb {
     private database: string
 
-    private db: IDBPDatabase
+    private db!: IDBPDatabase
 
     constructor(database: string) {
         this.database = database
@@ -71,6 +71,12 @@ class IndexedDb {
         await store.delete(id)
         console.log('Deleted Data', id)
         return id
+    }
+
+    public async deleteAllValue(tableName: string) {
+        const tx = this.db.transaction(tableName, 'readwrite')
+        const store = tx.objectStore(tableName)
+        await store.clear()
     }
 }
 

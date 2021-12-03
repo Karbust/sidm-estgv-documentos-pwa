@@ -2,8 +2,9 @@ import { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 
 interface Props {
+    key?: number
     bgColor: string
-    completed: string
+    completed: number
 }
 
 const ContainerDiv = styled.div`
@@ -30,8 +31,8 @@ const Label = styled.span`
   float: left;
 `
 
-const ProgressBar: FunctionComponent<Props> = ({ bgColor, completed }) => (
-    <ContainerDiv>
+const ProgressBar: FunctionComponent<Props> = ({ key, bgColor, completed }) => (
+    <ContainerDiv key={key}>
         <FilterDiv bgColor={bgColor} completed={completed}>
             <Label>{`${completed}%`}</Label>
         </FilterDiv>

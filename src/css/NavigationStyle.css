@@ -16,39 +16,42 @@
 }
 
 .primaryButton:hover {
-    background: #E40B0B;
+    background: #0178D4;
 }
 
 .primaryButton:active {
-    background: #E40B0B;
+    background: #0178D4;
 }
 
 
 .primaryButton2 {
-    background: #E40B0B;
+    background: #0178D4;
     border: none;
     border-radius: 11px !important;
     margin-left: 16px;
     margin-right: 16px;
     font-size: 1em;
     font-family: 'Poppins', 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .primaryButton2:visited {
-    background: #E40B0B;
+    background: #0178D4;
 }
 
 .primaryButton2:focus {
-    background: #E40B0B;
+    background: #0178D4;
     box-shadow: none !important;
 }
 
 .primaryButton2:hover {
-    background: #C30E0E;
+    background: #0266B3;
 }
 
 .primaryButton2:active {
-    background: #E40B0B;
+    background: #0178D4;
 }
 
 .secondaryButton {
@@ -66,21 +69,21 @@
 }
 
 .secondaryButton:visited {
-    color: #E40B0B;
+    color: #0178D4;
 }
 
 .secondaryButton:focus {
-    color: #C30E0E;
+    color: #0266B3;
     box-shadow: none !important;
 }
 
 .secondaryButton:hover {
-    background: #E40B0B;
+    background: #0178D4;
     color: white;
 }
 
 .secondaryButton:active {
-    background: #C30E0E;
+    background: #0266B3;
     color: white;
     box-shadow: none !important;
 }

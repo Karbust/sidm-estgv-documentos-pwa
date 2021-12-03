@@ -1,20 +1,20 @@
 import { FunctionComponent, useContext } from 'react'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { useSnackbar } from 'notistack'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 import { auth } from '../../../firebase/config'
 import { AuthContext } from '../../AuthContext'
-import { LoginInput } from '../../../types/typesForms'
+import { RegisterInput } from '../../../types/typesForms'
 
-import FormLogin from './FormLogin'
+import FormRegister from './FormRegister'
 
 interface Props {
     handleClose: () => void,
     handleToggle: () => void,
 }
 
-const FormikLogin: FunctionComponent<Props> = ({ handleClose, handleToggle }) => {
+const FormikRegister: FunctionComponent<Props> = ({ handleClose, handleToggle }) => {
     const { enqueueSnackbar } = useSnackbar()
 
     const {
@@ -22,13 +22,13 @@ const FormikLogin: FunctionComponent<Props> = ({ handleClose, handleToggle }) =>
     } = useContext(AuthContext)
 
     const onFormikSubmit = (
-        values: LoginInput,
-        formikActions: FormikHelpers<LoginInput>
+        values: RegisterInput,
+        formikActions: FormikHelpers<RegisterInput>
     ) => {
         handleToggle()
         setIsLoading(true)
 
-        return signInWithEmailAndPassword(auth, values.email, values.password)
+        return createUserWithEmailAndPassword(auth, values.email, values.password)
             .then((response) => {
                 console.log(response)
                 formikActions.setStatus(1)
@@ -54,23 +54,25 @@ const FormikLogin: FunctionComponent<Props> = ({ handleClose, handleToggle }) =>
     }
 
     return (
-        <Formik<LoginInput>
+        <Formik<RegisterInput>
             onSubmit={onFormikSubmit}
             validateOnBlur={false}
             validateOnChange={false}
             enableReinitialize
             initialStatus={0}
             initialValues={{
+                fullName: '',
                 email: '',
                 password: '',
+                passwordConfirm: ''
             }}
         >
             {({ status }) => (
                 <Form key={status}>
-                    <FormLogin />
+                    <FormRegister />
                 </Form>
             )}
         </Formik>
     )
 }
-export default FormikLogin
+export default FormikRegister
