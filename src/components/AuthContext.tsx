@@ -14,9 +14,7 @@ const AuthContextProvider: FunctionComponent<AuthProps> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
 
     useEffect(() => {
-        console.log('Estou aqui')
         onAuthStateChanged(auth, (user) => {
-            console.log('Estou aqui 1')
             if (user) {
                 console.log('We are authenticated now!')
                 setIsAuthenticated(true)

@@ -68,7 +68,6 @@ const ListItemFile: FunctionComponent<Props> = ({ value }) => {
     const downloadItem = () => {
         getDownloadURL(ref(storage, value.fullPath))
             .then((url) => {
-                console.log(url)
                 const xhr = new XMLHttpRequest()
                 xhr.responseType = 'blob'
                 xhr.onload = () => {
@@ -93,7 +92,7 @@ const ListItemFile: FunctionComponent<Props> = ({ value }) => {
                         variant: 'info',
                     })
                 } catch (err) {
-                    console.log(err)
+                    console.error(err)
                     enqueueSnackbar('Unknown error when copying the URL.', {
                         variant: 'error',
                     })

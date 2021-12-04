@@ -92,7 +92,6 @@ const DialogUpload: FunctionComponent<Props> = ({ open, handleClose }) => {
         setChoice(escolha)
     }
 
-    console.log({ choice, bool: choice !== 1 })
     const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
         const path = getCurrentFolder()
         const folderNew = folder !== '' ? `${folder}/` : ''
@@ -104,21 +103,19 @@ const DialogUpload: FunctionComponent<Props> = ({ open, handleClose }) => {
                     if (typeof data.base64 === 'string') {
                         try {
                             const upload = await uploadString(storageRef, data.base64, 'data_url')
-                            console.log(upload)
                             handleClose()
                             dispatch({
                                 type: 'SET_UPDATE',
                                 payload: state.update + 1
                             })
 
-                            const docRef = await addDoc(collection(db, 'documents'), {
+                            await addDoc(collection(db, 'documents'), {
                                 fileName: upload.metadata.name,
                                 size: upload.metadata.size,
                                 extension: upload.metadata.name.split('.').pop(),
                                 timeCreated: upload.metadata.timeCreated,
                                 owner: auth.currentUser?.uid,
                             })
-                            console.log('Document written with ID: ', docRef.id)
                         } catch (error) {
                             console.log(error)
                         }

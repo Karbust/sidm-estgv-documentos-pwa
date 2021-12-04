@@ -31,7 +31,6 @@ const FormikRegister: FunctionComponent<Props> = ({ handleClose, handleToggle })
 
         return createUserWithEmailAndPassword(auth, values.email, values.password)
             .then(async (response) => {
-                console.log(response)
                 formikActions.setStatus(1)
                 formikActions.resetForm()
                 setIsAuthenticated(true)

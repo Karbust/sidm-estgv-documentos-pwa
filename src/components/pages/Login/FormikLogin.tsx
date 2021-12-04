@@ -36,7 +36,6 @@ const FormikLogin: FunctionComponent<Props> = ({ handleClose, handleToggle }) =>
                 // New sign-in will be persisted with session persistence.
                 signInWithEmailAndPassword(auth, values.email, values.password)
                     .then((response) => {
-                        console.log(response)
                         formikActions.setStatus(1)
                         formikActions.resetForm()
                         setIsAuthenticated(true)
@@ -47,7 +46,7 @@ const FormikLogin: FunctionComponent<Props> = ({ handleClose, handleToggle }) =>
                     .catch((error) => {
                         const errorCode = error.code
                         const errorMessage = error.message
-                        console.log({ errorCode, errorMessage })
+                        console.error({ errorCode, errorMessage })
                         enqueueSnackbar(errorMessage, {
                             variant: 'error',
                         })

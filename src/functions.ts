@@ -26,12 +26,12 @@ export const getCurrentUser = async (isOnline: boolean): Promise<DocumentData | 
         const docRef = doc(db, 'users', auth.currentUser?.uid ?? '')
         const docSnap = await getDoc(docRef)
 
-        if (docSnap.exists()) {
+        /*if (docSnap.exists()) {
             console.log('Document data:', docSnap.data())
         } else {
             // doc.data() will be undefined in this case
             console.log('No such document!')
-        }
+        }*/
 
         localStorage.setItem('userData', JSON.stringify(docSnap.exists() ? docSnap.data() : ''))
 
@@ -65,7 +65,7 @@ export const listAllFiles = async ({
     const tableFolders = `${tableName}-folders`
     const indexedDbFiles = new IndexedDb(tableName)
     const indexedDbFolders = new IndexedDb(tableFolders)
-    console.log({ tableName, tableFolders })
+
     await indexedDbFiles.createObjectStore([tableName])
     await indexedDbFolders.createObjectStore([tableFolders])
 
