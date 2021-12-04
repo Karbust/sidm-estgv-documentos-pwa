@@ -3,12 +3,19 @@
     "name": "SIDM Documentos",
     "icons": [
         {
-            "src": "favicon.svg",
-            "type": "image/svg",
+            "src": "favicon.png",
+            "type": "image/png",
             "sizes": "410x404"
+        },
+        {
+            "src": "maskable_icon.png",
+            "type": "image/png",
+            "sizes": "1024x1024",
+            "purpose": "any maskable"
         }
     ],
-    "start_url": ".",
+    "start_url": "./",
+    "scope": ".",
     "display": "standalone",
     "theme_color": "#1f1c1f",
     "background_color": "#ffffff"

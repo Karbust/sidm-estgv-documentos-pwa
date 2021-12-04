@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 import { SnackbarProvider } from 'notistack'
 import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
+// @ts-ignore
+import { registerSW } from 'virtual:pwa-register'
 
 import './index.css'
 import App from './App'
@@ -56,4 +58,6 @@ ReactDOM.render(
     document.getElementById('root')
 )
 
-serviceWorker.register()
+const updateSW = registerSW({
+    onOfflineReady() {},
+})

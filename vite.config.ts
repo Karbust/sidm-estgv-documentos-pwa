@@ -33,6 +33,28 @@ export default ({ mode }) => {
         },
         workbox: {
           cleanupOutdatedCaches: false,
+        },
+        manifest: {
+          name: 'SIDM Documentos',
+          short_name: 'SIDM Documentos',
+          icons: [
+            {
+              src: "favicon.png",
+              type: "image/png",
+              sizes: "410x404"
+            },
+            {
+              src: "maskable_icon.png",
+              type: "image/png",
+              sizes: "1024x1024",
+              purpose: "any maskable"
+            }
+          ],
+          start_url: "./",
+          scope: ".",
+          display: "standalone",
+          theme_color: "#1f1c1f",
+          background_color: "#ffffff"
         }
       })
     ],
