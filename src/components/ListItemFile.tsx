@@ -17,6 +17,8 @@ import { humanFileSize, _saveBlob, errorDownloadUrlFirebase } from '../functions
 import { storage } from '../firebase/config'
 import { Context } from '../reducer/Store'
 
+import DialogFileDetails from './DialogFileDetails'
+
 const DangerMenuItem = styled(MenuItem)`
     color: #fff;
     background-color: #f00;
@@ -36,10 +38,13 @@ const ListItemFile: FunctionComponent<Props> = ({ value }) => {
 
     const { enqueueSnackbar } = useSnackbar()
 
+    const [open, setOpen] = useState<boolean>(false)
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
     const handleClickFile = (event: MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)
     const handleCloseFile = () => setAnchorEl(null)
+
+    const openDialog = () => setOpen(true)
 
     const deleteItem = () => {
         deleteObject(ref(storage, value.fullPath))
@@ -101,52 +106,57 @@ const ListItemFile: FunctionComponent<Props> = ({ value }) => {
     }
 
     return (
-        <ListItem
-            style={{ width: '100vw' }}
-            secondaryAction={(
-                <>
-                    <Menu
-                        anchorEl={anchorEl}
-                        open={Boolean(anchorEl)}
-                        onClose={handleCloseFile}
-                        PaperProps={{
-                            style: {
-                                maxHeight: 48 * 4.5,
-                                width: '14ch',
-                            },
-                        }}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
-                    >
-                        <MenuItem onClick={downloadItem}>Download</MenuItem>
-                        <MenuItem onClick={copyItemUrl}>Copy URL</MenuItem>
-                        <DangerMenuItem onClick={deleteItem}>Apagar</DangerMenuItem>
-                    </Menu>
-                    <IconButton
-                        edge='end'
-                        onClick={handleClickFile}
-                    >
-                        <MoreVertIcon />
-                    </IconButton>
-                </>
-            )}
-        >
-            <ListItemAvatar>
-                <Avatar>
-                    <InsertDriveFileOutlinedIcon />
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-                primary={value.name}
-                secondary={`${humanFileSize(value.size, true)} - ${format(new Date(value.timeCreated), 'dd-MM-yyyy HH:mm:ss')}`}
-            />
-        </ListItem>
+        <>
+            <DialogFileDetails value={value} open={open} setOpen={setOpen} />
+            <ListItem
+                style={{ width: '100vw' }}
+                secondaryAction={(
+                    <>
+                        <Menu
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleCloseFile}
+                            PaperProps={{
+                                style: {
+                                    maxHeight: 48 * 4.5,
+                                    width: '14ch',
+                                },
+                            }}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                        >
+                            <MenuItem onClick={downloadItem}>Download</MenuItem>
+                            <MenuItem onClick={copyItemUrl}>Copy URL</MenuItem>
+                            <DangerMenuItem onClick={deleteItem}>Apagar</DangerMenuItem>
+                        </Menu>
+                        <IconButton
+                            edge='end'
+                            onClick={handleClickFile}
+                        >
+                            <MoreVertIcon />
+                        </IconButton>
+                    </>
+                )}
+            >
+                <div role='button' tabIndex={0} onClick={openDialog} style={{ display: 'flex', alignItems: 'center' }}>
+                    <ListItemAvatar>
+                        <Avatar>
+                            <InsertDriveFileOutlinedIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary={value.name}
+                        secondary={`${humanFileSize(value.size, true)} - ${format(new Date(value.timeCreated), 'dd-MM-yyyy HH:mm:ss')}`}
+                    />
+                </div>
+            </ListItem>
+        </>
     )
 }
 export default ListItemFile

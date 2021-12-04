@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react'
+import { Link } from 'react-router-dom'
 import { Field, FieldProps, useFormikContext } from 'formik'
+import Box from '@mui/system/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import CircularProgress from '@mui/material/CircularProgress'
@@ -55,6 +57,21 @@ const FormLogin: FunctionComponent = () => {
                     />
                 )}
             </Field>
+            <Box
+                style={{
+                    width: '100%',
+                    textAlign: 'center'
+                }}
+            >
+                <Link
+                    to='/Login'
+                    style={{
+                        textDecoration: 'none !important'
+                    }}
+                >
+                    Don&apos;t have an account yet? Sign Up
+                </Link>
+            </Box>
             <Button
                 fullWidth
                 type='submit'

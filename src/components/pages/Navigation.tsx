@@ -52,6 +52,7 @@ const BottomNav = styled(BottomNavigation)`
 const Navigation = () => {
     const [value, setValue] = useState<number>(0)
 
+    const [openSidebar, setOpenSidebar] = useState(false)
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(!open)
     const handleClose = () => setOpen(false)
@@ -83,7 +84,7 @@ const Navigation = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position='absolute' style={{ boxShadow: 'none' }}>
-                <Sidebar />
+                <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
                 <Toolbar style={{
                     minHeight: '4em',
                     background: '#1F1C1F'

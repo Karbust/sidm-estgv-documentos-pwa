@@ -8,6 +8,7 @@ import Store from './reducer/Store'
 import Routes from './components/Routes'
 import { PrivateRouteProps } from './types/typesAuthProvider'
 import AuthContextProvider, { AuthContext } from './components/AuthContext'
+import Center from './components/Center'
 
 const Navigation = lazy(() => import('./components/pages/Navigation'))
 const Login = lazy(() => import('./components/pages/Login/Login'))
@@ -26,13 +27,7 @@ const PrivateRoute: FunctionComponent<PrivateRouteProps> = ({ component: Compone
                             ? <Component {...props} />
                             : <Redirect to='/Login' />
                     ) : (
-                        <Box className='outer'>
-                            <Box className='middle'>
-                                <Box className='inner'>
-                                    <CircularProgress color='inherit' />
-                                </Box>
-                            </Box>
-                        </Box>
+                        <Center loading component={CircularProgress} />
                     )
             )}
         />

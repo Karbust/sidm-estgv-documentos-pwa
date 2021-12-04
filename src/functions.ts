@@ -52,24 +52,51 @@ export const getCurrentFolder = (): string => {
 }
 
 interface listAllFilesProps {
+    isOnline: boolean
     setFolders: (value: SetStateAction<StorageReference[] | null>) => void
     setFiles: (value: SetStateAction<FullMetadata[] | null>) => void
     route?: string
 }
 
-export const listAllFiles = ({ setFolders, setFiles, route = '' }: listAllFilesProps) => {
-    const storageRef = ref(storage, `uploads/${auth.currentUser?.uid}/${route}`)
-    listAll(storageRef)
-        .then(async (res) => {
-            setFolders(res.prefixes.map((value) => value))
+export const listAllFiles = async ({
+    isOnline, setFolders, setFiles, route = ''
+}: listAllFilesProps) => {
+    const tableName = route !== '' ? route : 'root'
+    const tableFolders = `${tableName}-folders`
+    const indexedDbFiles = new IndexedDb(tableName)
+    const indexedDbFolders = new IndexedDb(tableFolders)
+    console.log({ tableName, tableFolders })
+    await indexedDbFiles.createObjectStore([tableName])
+    await indexedDbFolders.createObjectStore([tableFolders])
 
-            const data = await Promise.all(res.items.map(async (value) => {
-                const itemRef = ref(storage, value.fullPath)
-                return getMetadata(itemRef)
-            }))
-            setFiles(data)
-        })
-        .catch(console.error)
+    if (isOnline) {
+        const storageRef = ref(storage, `uploads/${auth.currentUser?.uid}/${route}`)
+        listAll(storageRef)
+            .then(async (res) => {
+                await indexedDbFiles.deleteAllValue(tableName)
+                await indexedDbFolders.deleteAllValue(tableFolders)
+
+                const dataFolders = await Promise.all(res.prefixes.map(async (value) => {
+                    await indexedDbFolders.putValue(tableFolders, { name: value.name, fullPath: value.fullPath })
+                    return value
+                }))
+                setFolders(dataFolders)
+
+                const data = await Promise.all(res.items.map(async (value) => {
+                    const itemRef = ref(storage, value.fullPath)
+                    const metadata = await getMetadata(itemRef)
+                    await indexedDbFiles.putValue(tableName, metadata)
+                    return metadata
+                }))
+                setFiles(data)
+            })
+            .catch(console.error)
+    } else {
+        const data = await indexedDbFiles.getAllValue(tableName)
+        const dataFolders = await indexedDbFolders.getAllValue(tableFolders)
+        setFiles(data)
+        setFolders(dataFolders)
+    }
 }
 
 export const getAllDocs = async () => {
@@ -122,7 +149,6 @@ export const humanFileSize = (bytes: number, si = false, dp = 1): string => {
 export const _saveBlob = (response: any, fileName: string) => {
     const a = document.createElement('a')
     document.body.appendChild(a)
-    a.style = 'display: none'
     a.href = window.URL.createObjectURL(response)
     a.download = fileName
     a.click()

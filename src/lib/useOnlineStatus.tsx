@@ -1,10 +1,13 @@
 import {
     createContext, FunctionComponent, useContext, useEffect, useState
 } from 'react'
+import { useSnackbar } from 'notistack'
+
+import SnackbarCloseButton from '../components/SnackbarCloseButton'
 
 const PING_RESOURCE = '/ping.txt'
 const TIMEOUT_TIME_MS = 3000
-const onlinePollingInterval = 10000
+const onlinePollingInterval = 5000
 
 const timeout = (time: number, promise: Promise<any>) => new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -44,16 +47,38 @@ const checkOnlineStatus = async () => {
 const OnlineStatusContext = createContext(true)
 
 export const OnlineStatusProvider: FunctionComponent = ({ children }) => {
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+    const [statusOnlineNotification, setStatusOnlineNotification] = useState<boolean>(true)
+
     const [onlineStatus, setOnlineStatus] = useState<boolean>(true)
 
     const checkStatus = async () => {
         const online = await checkOnlineStatus()
         setOnlineStatus(online)
+        if (online) {
+            closeSnackbar()
+        }
     }
+
+    useEffect(() => {
+        if (onlineStatus && !statusOnlineNotification) {
+            setStatusOnlineNotification(true)
+            enqueueSnackbar('Back online.', {
+                variant: 'success',
+                autoHideDuration: 3000,
+                preventDuplicate: true
+            })
+        }
+    }, [onlineStatus, statusOnlineNotification])
 
     useEffect(() => {
         window.addEventListener('offline', () => {
             setOnlineStatus(false)
+            setStatusOnlineNotification(false)
+            enqueueSnackbar('No internet connection.', {
+                variant: 'error',
+                persist: true
+            })
         })
 
         // Add polling incase of slow connection

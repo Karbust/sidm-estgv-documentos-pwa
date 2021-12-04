@@ -1,4 +1,7 @@
-import { FunctionComponent, useContext, useEffect, useState } from 'react'
+import {
+    FunctionComponent, SetStateAction, useContext, useEffect, useState
+} from 'react'
+import { Link } from 'react-router-dom'
 import { slide as Menu } from 'react-burger-menu'
 import FolderIcon from '@mui/icons-material/Folder'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -7,13 +10,18 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import '../css/Sidebar.css'
 import { auth } from '../firebase/config'
-import { getCurrentUser } from '../functions'
+import { getCurrentUser, MAIN_PATH } from '../functions'
 import { useOnlineStatus } from '../lib/useOnlineStatus'
 import UserImageMockup from '../images/Vi_OriginalCentered.jpg'
 
 import { AuthContext } from './AuthContext'
 
-const Sidebar: FunctionComponent = () => {
+interface Props {
+    openSidebar: boolean
+    setOpenSidebar: (value: SetStateAction<boolean>) => void
+}
+
+const Sidebar: FunctionComponent<Props> = ({ openSidebar, setOpenSidebar }) => {
     const isOnline = useOnlineStatus()
     const { logout } = useContext(AuthContext)
 
@@ -26,7 +34,10 @@ const Sidebar: FunctionComponent = () => {
     }, [])
 
     return (
-        <Menu>
+        <Menu
+            isOpen={openSidebar}
+            onStateChange={(state) => setOpenSidebar(state.isOpen)}
+        >
             <img
                 src={UserImageMockup}
                 alt='User'
@@ -42,27 +53,30 @@ const Sidebar: FunctionComponent = () => {
             />
             <p style={{ fontSize: '1.4em', marginBottom: '0px' }}>{name}</p>
             <p style={{ fontSize: '0.8em', color: '#0178D4' }}>{auth.currentUser?.email}</p>
-            <button type='button' className='btn btn-outline-primary btn-lg editButton'>
-                {/*<LogoutIcon/> */}
-                Edit Profile
-            </button>
 
             <hr className='line' />
 
-            <button type='button' className='btn btn-primary btn-lg menuButtons'>
+            <Link
+                to={`${MAIN_PATH}/Files`}
+                type='button'
+                className='btn btn-primary btn-lg menuButtons'
+                onClick={() => setOpenSidebar(false)}
+            >
                 <FolderIcon />
                 &nbsp;&nbsp;Files
                 <ArrowForwardIosIcon style={{ float: 'right', marginTop: '0.1em' }} />
-            </button>
+            </Link>
 
-            <button
+            <Link
+                to={`${MAIN_PATH}/Statistics`}
                 type='button'
                 className='btn btn-outline-primary btn-lg menuButtons'
+                onClick={() => setOpenSidebar(false)}
             >
                 <TimelineIcon />
                 &nbsp;&nbsp;Statistics
                 <ArrowForwardIosIcon style={{ float: 'right', marginTop: '0.1em' }} />
-            </button>
+            </Link>
 
             <button
                 type='button'

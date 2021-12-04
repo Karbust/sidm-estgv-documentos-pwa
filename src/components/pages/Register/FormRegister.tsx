@@ -1,14 +1,16 @@
 import { FunctionComponent } from 'react'
 import { Field, FieldProps, useFormikContext } from 'formik'
+import Box from '@mui/system/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import CircularProgress from '@mui/material/CircularProgress'
+import { Link } from 'react-router-dom'
 
 import { RegisterInput } from '../../../types/typesForms'
 
 const FormLogin: FunctionComponent = () => {
     const {
-        isValid, isSubmitting, validateField, values
+        isValid, isSubmitting, validateField
     } = useFormikContext<RegisterInput>()
 
     return (
@@ -74,6 +76,21 @@ const FormLogin: FunctionComponent = () => {
                     />
                 )}
             </Field>
+            <Box
+                style={{
+                    width: '100%',
+                    textAlign: 'center'
+                }}
+            >
+                <Link
+                    to='/Login'
+                    style={{
+                        textDecoration: 'none !important'
+                    }}
+                >
+                    Already have an account? Sign In
+                </Link>
+            </Box>
             <Button
                 fullWidth
                 type='submit'

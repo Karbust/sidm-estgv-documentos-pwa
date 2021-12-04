@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
 import ReactDOM from 'react-dom'
-import Box from '@mui/system/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import { SnackbarProvider } from 'notistack'
 import { createTheme, StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
@@ -9,6 +8,8 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorkerRegistration'
 import { OnlineStatusProvider } from './lib/useOnlineStatus'
+import Center from './components/Center'
+import SnackbarCloseButton from './components/SnackbarCloseButton'
 
 export const primaryColor = '#2C343F'
 export const secondaryColor = '#696969'
@@ -34,15 +35,7 @@ ReactDOM.render(
         <ThemeProvider theme={theme}>
             <Suspense
                 fallback={(
-                    <Box className='outer'>
-                        <Box className='middle'>
-                            <Box className='inner'>
-                                <section id='loading-screen'>
-                                    <CircularProgress color='inherit' />
-                                </section>
-                            </Box>
-                        </Box>
-                    </Box>
+                    <Center loading component={CircularProgress} />
                 )}
             >
                 <SnackbarProvider
@@ -51,6 +44,7 @@ ReactDOM.render(
                         vertical: 'top',
                         horizontal: 'right'
                     }}
+                    action={SnackbarCloseButton}
                 >
                     <OnlineStatusProvider>
                         <App />
